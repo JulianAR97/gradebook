@@ -26,7 +26,8 @@ subject_list = [
   'math',
   'science',
   'history',
-  'english'
+  'english',
+  'computer science'
 ]
 # '_' is customary for argument that won't be used
 user_list.each do |_, u_hash|
