@@ -1,4 +1,4 @@
-<h3>Assignments</h3>
+<h3>My Classes</h3>
 <% @subjects.each do |subject|%>
-    <h4><%= subject.title %></h4>
+    <a href="/<%subject.title%>/assignments"> <h4><%= subject.title %> </h4> </a>
 <% end %>
