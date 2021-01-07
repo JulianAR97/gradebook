@@ -1,5 +1,4 @@
 class Subject < ActiveRecord::Base
+    belongs_to :user
     has_many :assignments
-    has_many :user_subjects
-    has_many :users, through: :user_subjects
 end
