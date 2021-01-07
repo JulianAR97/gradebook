@@ -39,7 +39,6 @@ class AssignmentController < ApplicationController
     end
 
     get '/:slug/assignments/new' do
-        binding.pry
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
             if @subject
@@ -47,9 +46,9 @@ class AssignmentController < ApplicationController
                 @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
                 @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
                 erb :'assignments/new'
-            else 
+            else
                 redirect '/subjects'
-            end 
+            end
         else
             redirect '/login'
         end
@@ -97,7 +96,7 @@ class AssignmentController < ApplicationController
                 @assignment = @subject.assignments.find_by_id(params[:id])
                 @assignment.destroy if @assignment && @assignment.subject.user == current_user
                 redirect "/#{params[:slug]}/assignments"
-            else 
+            else
                 redirect '/subjects'
             end
         else
