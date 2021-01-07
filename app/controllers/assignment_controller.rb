@@ -15,17 +15,23 @@ class AssignmentController < ApplicationController
         end
     end
 
-    post '/assignments' do
+    post '/:slug/assignments' do
         if logged_in?
-            if params.values.include?('')
-                redirect '/assignments/new'
-            else
-                @assignment = current_user.assignments.build(params)
-                if @assignment.save
-                    redirect '/assignments'
+            @subject = current_user.subjects.find_by_slug(params[:slug])
+            if @subject
+                # if empty field 
+                if params[:assignment].values.include?('')
+                    redirect "/#{params[:slug]}/assignments/new"
                 else
-                    redirect 'assignments/new'
+                    @assignment = @subject.assignments.build(params[:assignment])
+                    if @assignment.save
+                        redirect "/#{params[:slug]}/assignments"
+                    else
+                        redirect "/#{params[:slug]}/assignments/new"
+                    end
                 end
+            else
+                redirect '/subjects'
             end
         else
             redirect '/login'
@@ -33,6 +39,7 @@ class AssignmentController < ApplicationController
     end
 
     get '/:slug/assignments/new' do
+        binding.pry
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
             if @subject
@@ -83,11 +90,16 @@ class AssignmentController < ApplicationController
         end
     end
 
-    delete '/assignments/:id' do
+    delete '/:slug/assignments/:id' do
         if logged_in?
-            @assignment = Assignment.find_by_id(params[:id])
-            @assignment.destroy if @assignment && @assignment.user == current_user
-            redirect '/assignments'
+            @subject = current_user.subjects.find_by_slug(params[:slug])
+            if @subject
+                @assignment = @subject.assignments.find_by_id(params[:id])
+                @assignment.destroy if @assignment && @assignment.subject.user == current_user
+                redirect "/#{params[:slug]}/assignments"
+            else 
+                redirect '/subjects'
+            end
         else
             redirect '/login'
         end
