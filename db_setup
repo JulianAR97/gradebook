@@ -1,4 +1,4 @@
 #!/bin/zsh
-rake db:rollback step=20
+rake db:rollback STEP=20 #Arbitrary STEP that is much higher than number of migrations
 rake db:migrate
 rake db:seed
