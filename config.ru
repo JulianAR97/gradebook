@@ -6,5 +6,5 @@ if ActiveRecord::Base.connection.migration_context.needs_migration?
 end
 
 use AssignmentController
-user UserController
+use UserController
 run ApplicationController
