@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_190723) do
     t.integer "score_earned"
     t.integer "score_possible"
     t.integer "user_id"
+    t.integer "subject_id"
   end
 
   create_table "subjects", force: :cascade do |t|

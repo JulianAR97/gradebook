@@ -5,6 +5,7 @@ class CreateAssignments < ActiveRecord::Migration[6.1]
       t.integer :score_earned
       t.integer :score_possible
       t.integer :user_id
+      t.integer :subject_id
     end
   end
 end
