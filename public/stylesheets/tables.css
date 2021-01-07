@@ -1,0 +1,44 @@
+td {
+    border : 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+thead, tfoot {
+    font-weight: bold;
+}
+
+input[type="text"]::placeholder {
+    text-align: center;
+}
+
+.assingments {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input, select {
+    background-color: #3B945E;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    color: #F2F2F2;
+}
+
+/* No l/r padding for input cells in table so that col widths stay consistent */
+.input_cell {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #F2F2F2;
+}
+
+#add_assignment {
+    padding: 5px;
+    width: 150px;
+    font-size: 90%;
+}
+
+.no_style {
+    border: none;
+    
+}

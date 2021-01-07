@@ -13,14 +13,14 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: lightblue;
-    color: #333;
-    font-family: Sans-Serif;
+    background-color: #57BA98;
+    color: #182628;
+    font-family: "Courier New", Courier, monospace;
     line-height: 18px;
   }
 
   .wrapper {
-    background: #fff;
+    background: #57BA98;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -113,3 +113,37 @@
     line-height: 24px;
   }
 }
+
+.assignments {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer_button {
+  position: absolute;
+  right: 110px;
+}
+
+.creds {
+  background-color: #3B945E;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+button {
+  width: 60px;
+  background-color: #3B945E;
+  font-family: 'Courier New', Courier, monospace;
+  color: #F2F2F2;
+}
+
+.centered {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+/* 182628 - Navy for font
+65CCB8 - background
+57BA98 - accent
+3B945E - accent
+F2F2F2 - White */
