@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
                 !!password.match(/[!@#$%^&*()+~`{}'":;.,<>?]/) #password includes special char
             ]
             # if each of the criteria is true, method returns true
-            return !criteria.include?(false)
+            !criteria.include?(false)
         end
     end
 
