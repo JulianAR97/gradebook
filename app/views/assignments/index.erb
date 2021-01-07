@@ -37,7 +37,7 @@
                     <td> <%= assignment.score_possible %> </td>
                     <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
                     <td class="no_style">
-                        <form action="/assignments/<%=assignment.id%>" method="post">
+                        <form action="/<%=@assignments.first.subject.slugify%>/assignments/<%=assignment.id%>" method="post">
                             <input type="hidden" name="_method" value="delete">
                             <button type="submit">Delete</button>
                         </form>
