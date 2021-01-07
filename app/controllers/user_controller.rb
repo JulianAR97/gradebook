@@ -15,7 +15,8 @@ class UserController < ApplicationController
             session[:user_id] = @user.id
             redirect '/subjects'
         else
-            redirect '/signup'
+            # flash message saying that credentials are not valid, offer to sign up
+            redirect '/login'
         end
     end
 
