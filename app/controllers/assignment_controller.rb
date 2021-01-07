@@ -7,6 +7,8 @@ class AssignmentController < ApplicationController
                 @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
                 @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
                 erb :'assignments/index'
+            else
+                redirect '/subjects'
             end
         else
             redirect '/login'
@@ -30,13 +32,17 @@ class AssignmentController < ApplicationController
         end
     end
 
-    get '/assignments/new' do
+    get '/:slug/assignments/new' do
         if logged_in?
-            # generate_form: true is a flag variable to create new table row in view
-            @assignments = current_user.assignments.sort_by { |a| [a[:category], a[:score_possible]] }
-            @total_score = current_user.assignments.map(&:score_earned).reduce(:+)
-            @total_possible = current_user.assignments.map(&:score_possible).reduce(:+)
-            erb :'assignments/new'
+            @subject = current_user.subjects.find_by_slug(params[:slug])
+            if @subject
+                @assignments = @subject.assignments.sort_by { |a| [a[:category], a[:score_possible]] }
+                @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
+                @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
+                erb :'assignments/new'
+            else 
+                redirect '/subjects'
+            end 
         else
             redirect '/login'
         end
