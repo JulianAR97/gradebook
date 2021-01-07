@@ -1,0 +1,61 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/tables.css" />
+</head>
+
+<h3> Assignments </h3>
+
+
+<table class="assignments" style="width: 70%">
+    <colgroup>
+        <col span="1" style="width: 25%">
+        <col span="1" style="width: 15%">
+        <col span="1" style="width: 15%">
+        <col span="1" style="width: 15%">
+    </colgroup>
+    <thead>
+        <tr>
+            <td> Type </td>
+            <td> Points </td>
+            <td> Possible </td>
+            <td> Grade </td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @assignments.each do |assignment| %>
+            <tr>
+                <td> <%= assignment.category %> </td>
+                <td> <%= assignment.score_earned %> </td>
+                <td> <%= assignment.score_possible %> </td>
+                <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
+            </tr>
+        <% end %>
+        <form action="/assignments" method="post">
+            <tr>
+                <td class="input_cell"> 
+                    <select id="category" name="category">
+                        <option value="homework"> homework </option>
+                        <option value="project"> project </option>
+                        <option value="test"> test </option>
+                    </select>
+                </td>
+                <td class="input_cell"> <input type="number", name="score_earned" style="width: 40px;"> </td>
+                <td class="input_cell"> <input type="number", name="score_possible" style="width: 40px;"> </td>
+                <td class="input_cell"> <button type="submit">Add</button> </td>
+            </tr>
+        </form>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>Total</td>
+            <!-- Sums Column Data -->
+            <td> <%= @total_score ||= 0 %> </td>
+            <td> <%= @total_possible ||= 0%> </td>
+            <!-- Averages Column Data -->
+            <% if @total_possible != 0 %>
+                <td> <%= Assignment.score_as_percentage(@total_score, @total_possible) %> </td>
+            <% else %>
+                <td> 0 </td>
+            <% end %>
+        </tr>
+    </tfoot>
+</table>

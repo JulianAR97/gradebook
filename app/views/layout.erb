@@ -20,6 +20,16 @@
 
       <footer class="branding">
         <small>&copy; 2021 <strong>Gradebook</strong></small>
+        <% if logged_in? %>
+          <a href="/logout"><button class="footer_button" type="button"> Logout </button></a>
+        <% else %>
+          <% path = request.env['PATH_INFO'] %>
+          <% if path == '/login' %>
+            <a href="/signup"><button class="footer_button" type="button"> Signup </button></a>
+          <% else %>
+            <a href="/login"><button class="footer_button" type="button"> Login </button></a>
+          <% end %>
+        <% end %>
       </footer>
     </div>
 

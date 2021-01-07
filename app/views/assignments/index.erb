@@ -1,0 +1,76 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/tables.css" />
+</head>
+
+<body>
+    <h3> Assignments </h3>
+
+    <table class="assignments" style="width: 70%">
+        <colgroup>
+            <col span="1" style="width: 0%">
+            <col span="1" style="width: 25%">
+            <col span="1" style="width: 15%">
+            <col span="1" style="width: 15%">
+            <col span="1" style="width: 15%">
+            <col span="1" style="widtch: 0%">
+        </colgroup>
+        <thead>
+            <tr>
+                <td class="no_style"></td>
+                <td> Type </td>
+                <td> Points </td>
+                <td> Possible </td>
+                <td> Grade </td>
+                <td class="no_style"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <% @assignments.each do |assignment| %>
+                <tr>
+                    <td class="no_style">
+                        <a href="/assignments/<%= assignment.id%>/edit">
+                            <button>Edit</button> 
+                        </a>
+                    </td>
+                    <td> <%= assignment.category %> </td>
+                    <td> <%= assignment.score_earned %> </td>
+                    <td> <%= assignment.score_possible %> </td>
+                    <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
+                    <td class="no_style">
+                        <form action="/assignments/<%=assignment.id%>" method="post">
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+               
+            <% end %>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="no_style"></td>
+                <td>Total</td>
+                <!-- Sums Column Data -->
+                <td> <%= @total_score ||= 0 %> </td>
+                <td> <%= @total_possible ||= 0%> </td>
+                <!-- Averages Column Data -->
+                <% if @total_possible != 0 %>
+                    <td> <%= Assignment.score_as_percentage(@total_score, @total_possible) %> </td>
+                <% else %>
+                    <td> 0 </td>
+                <% end %>
+                <td class="no_style"></td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+    <br>
+    <div class="centered">
+        <a href="/assignments/new">
+            <button id="add_assignment"> Add Assignment </button>
+        </a>
+        <br>
+
+    </div>
+</body>
