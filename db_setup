@@ -1,0 +1,4 @@
+#!/bin/zsh
+rake db:rollback step=20
+rake db:migrate
+rake db:seed
