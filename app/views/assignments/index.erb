@@ -28,7 +28,7 @@
             <% @assignments.each do |assignment| %>
                 <tr>
                     <td class="no_style">
-                        <a href="/assignments/<%= assignment.id%>/edit">
+                        <a href="/<%=@assignments.first.subject.slugify%>/assignments/<%= assignment.id%>/edit">
                             <button>Edit</button> 
                         </a>
                     </td>
