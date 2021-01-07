@@ -1,3 +1,4 @@
+# Added this file so that migrations work with active-record 6.1.0
 default: &default
     adapter: 'sqlite3'
     database: 'db/development.sqlite'
