@@ -1,5 +1,6 @@
 class AssignmentController < ApplicationController
-    
+
+    #Index 
     get '/:slug/assignments' do
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
@@ -16,6 +17,7 @@ class AssignmentController < ApplicationController
         end
     end
 
+    # New
     post '/:slug/assignments' do
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
@@ -39,6 +41,7 @@ class AssignmentController < ApplicationController
         end
     end
 
+    # New
     get '/:slug/assignments/new' do
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
@@ -55,6 +58,7 @@ class AssignmentController < ApplicationController
         end
     end
 
+    # Edit
     get '/:slug/assignments/:id/edit' do
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
@@ -76,6 +80,7 @@ class AssignmentController < ApplicationController
         end
     end
 
+    # Edit
     patch '/:slug/assignments/:id' do
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
@@ -104,6 +109,7 @@ class AssignmentController < ApplicationController
         end
     end
 
+    # Edit
     delete '/:slug/assignments/:id' do
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
