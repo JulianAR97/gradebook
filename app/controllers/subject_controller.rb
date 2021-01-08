@@ -8,6 +8,12 @@ class SubjectController < ApplicationController
         end
     end
 
+    get '/subjects/new' do
+        if logged_in?
+            erb :'subjects/new'
+        end
+    end
+
     get '/subjects/:slug' do
         if logged_in? 
             @subject = current_user.subjects.find_by_slug(params[:slug])
@@ -21,5 +27,8 @@ class SubjectController < ApplicationController
         end
     end
 
+    post '/subjects' do
+
+    end
 
 end
