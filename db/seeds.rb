@@ -1,25 +1,25 @@
-# User / Subject seeding 
+# User / Subject seedings
 user_list = {
-    'Kyle' => {
-      username: 'save',
-      password: 'liontiger'
-    },
-    'Taylor' => {
-      username: 'lightbulb',
-      password: 'lightswitch'
-    },
-    'Kaycee' => {
-      username: 'bucsfan',
-      password: 'bruins19'
-    },
-    'Julian' => {
-      username: 'thecreator',
-      password: 'icreatedthis'
-    },
-    'Brandon' => {
-      username: 'thesauceyman',
-      password: 'ilovejulian'
-    }
+  'Kyle' => {
+    username: 'save',
+    password: 'liontiger'
+  },
+  'Taylor' => {
+    username: 'lightbulb',
+    password: 'lightswitch'
+  },
+  'Kaycee' => {
+    username: 'bucsfan',
+    password: 'bruins19'
+  },
+  'Julian' => {
+    username: 'thecreator',
+    password: 'icreatedthis'
+  },
+  'Brandon' => {
+    username: 'thesauceyman',
+    password: 'ilovejulian'
+  }
 }
 
 subject_list = [
@@ -44,22 +44,27 @@ def rand_by_five(low, high)
         return r if (r % 5).zero?
     end
 end
-  
 a_types = {
   'homework' => { low: 10, high: 20 },
   'project' => { low: 50, high: 120 },
   'test' => { low: 75, high: 150 }
 }
-  
 (Subject.count * 7).times do
     s = a_types.to_a.sample # s = [type, score_possible_range]
     if s[0] == 'homework' 
         score_possible = rand(s[1][:low]..s[1][:high])
     else
         score_possible = rand_by_five(s[1][:low], s[1][:high])
-    end 
+    end
 
     score_earned = rand((score_possible / 2).round(0)..score_possible)
+    assignment_hash = {
+      category: s[0],
+      score_earned: score_earned,
+      score_possible: score_possible,
+      subject_id: rand(1..Subject.count),
+      date: "#{rand(2018..2020)}-#{rand(1..12)}-#{rand(0..28)}"
+    }
 
-    Assignment.create(category: s[0], score_earned: score_earned, score_possible: score_possible, subject_id: rand(1..Subject.count))
+    Assignment.create(assignment_hash)
 end
