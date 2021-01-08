@@ -21,31 +21,31 @@
             </tr>
         </thead>
         <tbody>
-            <% @assignments.each do |assignment| %>
+            <% @s_assignments.each do |a| %>
 
-                <% if assignment.id == @assignment.id %>
+                <% if a.id == @assignment.id %>
                     <form action="/<%=@subject.slugify%>/assignments/<%=@assignment.id%>" method="post">
                         <input type="hidden" name="_method" value="patch">
                         <tr>
                             <td class="input_cell"> 
                                 <select id="category" name="assignment[category]">
-                                    <option value="help" selected disabled>Choose a Type</option>
+                                    <option value="disabled" selected disabled>Choose a Type</option>
                                     <option value="homework"> homework </option>
                                     <option value="project"> project </option>
                                     <option value="test"> test </option>
                                 </select>
                             </td>
-                            <td class="input_cell"> <input type="number", name="assignment[score_earned]" value="<%=assignment.score_earned%>" style="width: 40px;"> </td>
-                            <td class="input_cell"> <input type="number", name="assignment[score_possible]" value="<%=assignment.score_possible%>" style="width: 40px;"> </td>
+                            <td class="input_cell"> <input type="number", name="assignment[score_earned]" value="<%=a.score_earned%>" style="width: 40px;"> </td>
+                            <td class="input_cell"> <input type="number", name="assignment[score_possible]" value="<%=a.score_possible%>" style="width: 40px;"> </td>
                             <td class="input_cell"> <button type="submit">Edit</button> </td>
                         </tr>
                     </form>
                 <% else %>
                     <tr>
-                        <td> <%= assignment.category %> </td>
-                        <td> <%= assignment.score_earned %> </td>
-                        <td> <%= assignment.score_possible %> </td>
-                        <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
+                        <td> <%= a.category %> </td>
+                        <td> <%= a.score_earned %> </td>
+                        <td> <%= a.score_possible %> </td>
+                        <td> <%= Assignment.score_as_percentage(a.score_earned, a.score_possible) %> </td>
                     </tr>
                 <% end %>     
             <% end %>

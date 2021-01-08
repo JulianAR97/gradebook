@@ -61,6 +61,7 @@ class AssignmentController < ApplicationController
                 @assignments = @subject.assignments
                 @assignment = @assignments.find_by_id(params[:id])
                 if @assignment
+                    @s_assignments = @assignments.sort_for_table
                     @total_score = @assignments.map(&:score_earned).reduce(:+)
                     @total_possible = @assignments.map(&:score_possible).reduce(:+)
                     erb :'assignments/edit'
