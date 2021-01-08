@@ -2,8 +2,7 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
-        
-    before '/*' do
+    before '/subjects*' do
         redirect '/login' unless logged_in?
     end
 
