@@ -22,6 +22,12 @@ user_list = {
   }
 }
 
+a_list = {
+  'homework' => { low: 10, high: 20 },
+  'project' => { low: 50, high: 120 },
+  'test' => { low: 75, high: 150 }
+}
+
 subject_list = [
   'math',
   'science',
@@ -29,11 +35,12 @@ subject_list = [
   'english',
   'computer science'
 ]
+
 # '_' is customary for argument that won't be used
 user_list.each do |_, u_hash|
     user = User.create(username: u_hash[:username], password: u_hash[:password])
-    subject_list.each do |s|
-      user.subjects << Subject.create(title: s)
+    subject_list.each do |sbj|
+      user.subjects << Subject.create(title: sbj)
     end
 end
 
@@ -45,28 +52,22 @@ def rand_by_five(low, high)
     end
 end
 
-a_types = {
-  'homework' => { low: 10, high: 20 },
-  'project' => { low: 50, high: 120 },
-  'test' => { low: 75, high: 150 }
-}
 (Subject.count * 7).times do
-    s = a_types.to_a.sample # s = [type, score_possible_range]
-    if s[0] == 'homework' 
-        score_possible = rand(s[1][:low]..s[1][:high])
+    sbj = a_list.to_a.sample # s = [type, score_range_obj]
+    if sbj[0] == 'homework' 
+        s_possible = rand(sbj[1][:low]..sbj[1][:high])
     else
-        score_possible = rand_by_five(s[1][:low], s[1][:high])
+        s_possible = rand_by_five(sbj[1][:low], sbj[1][:high])
     end
-
-    score_earned = rand((score_possible / 2).round(0)..score_possible)
-    assignment_hash = {
-      category: s[0],
-      score_earned: score_earned,
-      score_possible: score_possible,
+    s_earned = rand((s_possible / 2).round(0)..s_possible)
+    a_hash = {
+      category: sbj[0],
+      score_earned: s_earned,
+      score_possible: s_possible,
       subject_id: rand(1..Subject.count),
       # rand returns date object, strftime (string format time)
       date: rand(1.year.ago..1.year.from_now).strftime('%m/%d/%Y')
     }
 
-    Assignment.create(assignment_hash)
+    Assignment.create(a_hash)
 end
