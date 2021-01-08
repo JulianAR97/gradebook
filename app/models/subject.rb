@@ -9,4 +9,8 @@ class Subject < ActiveRecord::Base
     def slugify
         title.downcase.gsub(' ', '-')
     end
+
+    def display_title
+        title.split(' ').map(&:capitalize).join(' ')
+    end
 end
