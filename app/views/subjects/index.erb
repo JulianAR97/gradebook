@@ -1,5 +1,10 @@
 <h3>My Classes</h3>
 <% @subjects.each do |subject|%>
     <a href="/<%=subject.slugify%>/assignments"> <h4><%= subject.display_title %> </h4> </a>
+    <form action="/subjects/<%=subject.slugify%>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit">Remove Class</button>
+    </form>
 <% end %>
 <a href="/subjects/new"><button type="button">Add Class</button></a>
+

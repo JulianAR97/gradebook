@@ -18,7 +18,7 @@ class SubjectController < ApplicationController
     end
 
     get '/subjects/:slug' do
-        if logged_in? 
+        if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
             if @subject
                 redirect "/#{@subject.slugify}/assignments"
@@ -42,6 +42,17 @@ class SubjectController < ApplicationController
                 @subject = current_user.subjects.build(title: params[:title])
                 redirect "/subjects/#{@subject.slugify}" if @subject.save
             end
+        else
+            redirect '/login'
+        end
+    end
+
+    delete '/subjects/:slug' do
+        if logged_in?
+            @subject = current_user.subjects.find_by_slug(params[:slug])
+            # &. is save navigation and is equivelent to destroy if exists
+            @subject&.destroy
+            redirect '/subjects'
         else
             redirect '/login'
         end
