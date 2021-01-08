@@ -21,10 +21,10 @@ class SubjectController < ApplicationController
     post '/subjects' do
         # Convert the title to downcase to keep consistency
         if params[:title].downcase! == ''
-            # Display message class creation failed, field cannot be empty
+            flash[:notice] = 'Class Creation Failed, Fields Cannot Be Empty!'
             redirect '/subjects'
         elsif current_user.subjects.find_by(title: params[:title])
-            # Display message that cannot create class with same name
+            flash[:notice] = 'Class Creation Failed, Cannot Have 2 Classes With The Same Name!'
             redirect '/subjects/new'
         else
             @subject = current_user.subjects.build(title: params[:title])
@@ -38,7 +38,8 @@ class SubjectController < ApplicationController
     delete '/subjects/:slug' do
         @subject = current_user.subjects.find_by_slug(params[:slug])
         # &. is save navigation and is equivelent to destroy if exists
-        @subject&.destroy
+        flash[:notice] = 'Class Successfully Removed!' if @subject&.destroy
         redirect '/subjects'
     end
+
 end

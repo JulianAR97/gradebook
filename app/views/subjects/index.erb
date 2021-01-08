@@ -1,3 +1,4 @@
+<%= flash[:notice]%>
 <h3>My Classes</h3>
 <% @subjects.each do |subject|%>
     <a href="/<%=subject.slugify%>/assignments"> <h4><%= subject.display_title %> </h4> </a>
