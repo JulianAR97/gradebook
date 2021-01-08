@@ -1,7 +1,7 @@
 require './config/environment'
-
+require 'rack-flash' # Why is this necessary
 class ApplicationController < Sinatra::Base
-
+    use Rack::Flash
     before '/subjects*' do
         redirect '/login' unless logged_in?
     end
@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
         set :views, 'app/views'
         enable :sessions
         set :session_secret, 'session secret' # Simplified
-        # use Rack::Flash
+
     end
 
     get '/' do
