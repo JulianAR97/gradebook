@@ -46,9 +46,9 @@ def rand_by_five(low, high)
 end
   
 a_types = {
-'homework' => { low: 10, high: 20 },
-'project' => { low: 50, high: 120 },
-'test' => { low: 75, high: 150 }
+  'homework' => { low: 10, high: 20 },
+  'project' => { low: 50, high: 120 },
+  'test' => { low: 75, high: 150 }
 }
   
 (Subject.count * 7).times do
