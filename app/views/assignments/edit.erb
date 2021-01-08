@@ -24,7 +24,7 @@
             <% @assignments.each do |assignment| %>
 
                 <% if assignment.id == @assignment.id %>
-                    <form action="/<%=@assignments.first.subject.slugify%>/assignments/<%=@assignment.id%>" method="post">
+                    <form action="/<%=@subject.slugify%>/assignments/<%=@assignment.id%>" method="post">
                         <input type="hidden" name="_method" value="patch">
                         <tr>
                             <td class="input_cell"> 

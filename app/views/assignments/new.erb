@@ -29,7 +29,7 @@
                 <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
             </tr>
         <% end %>
-        <form action="/<%=@assignments.first.subject.slugify%>/assignments" method="post">
+        <form action="/<%=@subject.slugify%>/assignments" method="post">
             <tr>
                 <td class="input_cell"> 
                     <select id="category" name="assignment[category]">
