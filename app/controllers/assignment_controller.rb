@@ -54,35 +54,50 @@ class AssignmentController < ApplicationController
         end
     end
 
-    get '/assignments/:id/edit' do
+    get '/:slug/assignments/:id/edit' do
         if logged_in?
-            @assignment = Assignment.find_by_id(params[:id])
-            if @assignment.user == current_user
-                @assignments = current_user.assignments
-                @total_score = @total_score = current_user.assignments.map(&:score_earned).reduce(:+)
-                @total_possible = current_user.assignments.map(&:score_possible).reduce(:+)
-                erb :'assignments/edit'
+            @subject = current_user.subjects.find_by_slug(params[:slug])
+            if @subject
+                @assignments = @subject.assignments
+                @assignment = @assignments.find_by_id(params[:id])
+                if @assignment
+                    @total_score = @assignments.map(&:score_earned).reduce(:+)
+                    @total_possible = @assignments.map(&:score_possible).reduce(:+)
+                    erb :'assignments/edit'
+                else
+                    redirect "/#{params[:slug]}/assignments"
+                end
+            else
+                redirect '/subjects'
             end
         else
             redirect '/login'
-        end 
+        end
     end
 
-    patch '/assignments/:id' do
+    patch '/:slug/assignments/:id' do
         if logged_in?
-            if params[:assignment].values.include?('')
-                redirect "assignments/#{params[:id]}/edit"
-            else
-                @assignment = Assignment.find_by_id(params[:id])
-                if @assignment && @assignment.user == current_user
-                    if @assignment.update(params[:assignment])
-                        redirect '/assignments'
-                    else
-                        redirect "/assignments/#{params[:id]}/edit"
-                    end
+            @subject = current_user.subjects.find_by_slug(params[:slug])
+
+            if @subject
+                if params[:assignment].values.include?('')
+                    redirect "assignments/#{params[:id]}/edit"
+                    # Give error message saying that fields cannot be blank
                 else
-                    redirect '/assignments'
+                    @assignment = Assignment.find_by_id(params[:id])
+                    if @assignment
+                        if @assignment.update(params[:assignment])
+                            redirect "/#{params[:slug]}/assignments"
+                            # Give success message
+                        else
+                            redirect "/assignments/#{params[:id]}/edit"
+                        end
+                    else
+                        redirect '/assignments'
+                    end
                 end
+            else
+                redirect '/subjects'
             end
         else
             redirect '/login'
