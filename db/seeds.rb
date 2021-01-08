@@ -44,6 +44,7 @@ def rand_by_five(low, high)
         return r if (r % 5).zero?
     end
 end
+
 a_types = {
   'homework' => { low: 10, high: 20 },
   'project' => { low: 50, high: 120 },
@@ -63,7 +64,8 @@ a_types = {
       score_earned: score_earned,
       score_possible: score_possible,
       subject_id: rand(1..Subject.count),
-      date: "#{rand(2018..2020)}-#{rand(1..12)}-#{rand(0..28)}"
+      # rand returns date object, strftime (string format time)
+      date: rand(1.year.ago..1.year.from_now).strftime('%m/%d/%Y')
     }
 
     Assignment.create(assignment_hash)
