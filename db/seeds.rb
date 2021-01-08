@@ -66,7 +66,7 @@ end
       score_possible: s_possible,
       subject_id: rand(1..Subject.count),
       # rand returns date object, strftime (string format time)
-      date: rand(1.year.ago..1.year.from_now).strftime('%m/%d/%Y')
+      date: rand(1.year.ago..1.year.from_now).strftime('%Y%-%m-%d')
     }
 
     Assignment.create(a_hash)
