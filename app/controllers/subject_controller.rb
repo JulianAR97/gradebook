@@ -19,11 +19,11 @@ class SubjectController < ApplicationController
     end
 
     post '/subjects' do
-        # Convert the title to downcase to keep consistency
-        if params[:title].downcase! == ''
-            flash[:notice] = 'Class Creation Failed, Fields Cannot Be Empty!'
+        if params[:title] == ''
+            flash[:notice] = 'Class Creation Failed, Class Needs a Title!'
             redirect '/subjects'
-        elsif current_user.subjects.find_by(title: params[:title])
+        # Convert the title to downcase to keep consistency
+        elsif current_user.subjects.find_by(title: params[:title].downcase!)
             flash[:notice] = 'Class Creation Failed, Cannot Have 2 Classes With The Same Name!'
             redirect '/subjects/new'
         else
