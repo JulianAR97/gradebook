@@ -3,6 +3,9 @@
 </head>
 
 <body>
+    <!-- No need for if statement -->
+    <%= flash[:notice] %>
+
     <h3> <%=@subject.display_title %> </h3>
 
     <table class="assignments" style="width: 70%">
