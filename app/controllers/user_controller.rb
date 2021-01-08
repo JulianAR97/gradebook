@@ -11,7 +11,7 @@ class UserController < ApplicationController
         @user = User.find_by(username: params[:username])
 
         # Use && user.authenticate(params[:password]) with bcrypt
-        if @user && @user.password == params[:password]
+        if @user&.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect '/subjects'
         else
