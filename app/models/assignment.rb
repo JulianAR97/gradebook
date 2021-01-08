@@ -10,8 +10,4 @@ class Assignment < ActiveRecord::Base
         all.sort_by { |a| [a[:category], a[:date]] }
     end
 
-    def display_date
-        # Date is written as 2020-12-08, and I don't care about the year for display
-        date.split('-')[1..2].join('/')
-    end
 end
