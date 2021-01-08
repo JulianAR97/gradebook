@@ -19,7 +19,8 @@ class SubjectController < ApplicationController
     end
 
     post '/subjects' do
-        if params[:title] == ''
+        # Convert the title to downcase to keep consistency
+        if params[:title].downcase! == ''
             # Display message class creation failed, field cannot be empty
             redirect '/subjects'
         elsif current_user.subjects.find_by(title: params[:title])
