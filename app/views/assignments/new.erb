@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="/stylesheets/tables.css" />
 </head>
 
-<h3> Assignments </h3>
+<h3> <%=@subject.display_title %> </h3>
 
 
 <table class="assignments" style="width: 70%">
@@ -29,17 +29,17 @@
                 <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
             </tr>
         <% end %>
-        <form action="/assignments" method="post">
+        <form action="/<%=@subject.slugify%>/assignments" method="post">
             <tr>
                 <td class="input_cell"> 
-                    <select id="category" name="category">
+                    <select id="category" name="assignment[category]">
                         <option value="homework"> homework </option>
                         <option value="project"> project </option>
                         <option value="test"> test </option>
                     </select>
                 </td>
-                <td class="input_cell"> <input type="number", name="score_earned" style="width: 40px;"> </td>
-                <td class="input_cell"> <input type="number", name="score_possible" style="width: 40px;"> </td>
+                <td class="input_cell"> <input type="number", name="assignment[score_earned]" style="width: 40px;"> </td>
+                <td class="input_cell"> <input type="number", name="assignment[score_possible]" style="width: 40px;"> </td>
                 <td class="input_cell"> <button type="submit">Add</button> </td>
             </tr>
         </form>

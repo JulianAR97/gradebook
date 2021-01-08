@@ -3,7 +3,7 @@ class UserController < ApplicationController
         if !logged_in?
             erb :'users/login'
         else
-            redirect '/assignments'
+            redirect '/subjects'
         end
     end
 
@@ -13,9 +13,10 @@ class UserController < ApplicationController
         # Use && user.authenticate(params[:password]) with bcrypt
         if @user && @user.password == params[:password]
             session[:user_id] = @user.id
-            redirect '/assignments'
+            redirect '/subjects'
         else
-            redirect '/signup'
+            # flash message saying that credentials are not valid, offer to sign up
+            redirect '/login'
         end
     end
 
@@ -23,7 +24,7 @@ class UserController < ApplicationController
         if !logged_in?
             erb :'users/signup'
         else
-            redirect '/assignments'
+            redirect '/subjects'
         end
     end
 
@@ -32,11 +33,12 @@ class UserController < ApplicationController
             # flash message saying that fields can't be empty or username already exists
             redirect '/signup'
         elsif !valid_password?(params[:password])
+            # flash message saying that it is not a valid password
             redirect '/signup'
         else
             @user = User.create(username: params[:username], password: params[:password])
             session[:user_id] = @user.id
-            redirect '/assignments'
+            redirect '/subjects'
         end
     end
 

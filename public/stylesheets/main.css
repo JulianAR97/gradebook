@@ -119,11 +119,6 @@
   margin-right: auto;
 }
 
-.footer_button {
-  position: absolute;
-  right: 110px;
-}
-
 .creds {
   background-color: #3B945E;
   font-family: 'Courier New', Courier, monospace;

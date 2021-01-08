@@ -3,7 +3,7 @@
 </head>
 
 <body>
-    <h3> Assignments </h3>
+    <h3> <%=@subject.display_title %> </h3>
 
     <table class="assignments" style="width: 70%">
         <colgroup>
@@ -28,7 +28,7 @@
             <% @assignments.each do |assignment| %>
                 <tr>
                     <td class="no_style">
-                        <a href="/assignments/<%= assignment.id%>/edit">
+                        <a href="/<%=@assignments.first.subject.slugify%>/assignments/<%= assignment.id%>/edit">
                             <button>Edit</button> 
                         </a>
                     </td>
@@ -37,7 +37,7 @@
                     <td> <%= assignment.score_possible %> </td>
                     <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
                     <td class="no_style">
-                        <form action="/assignments/<%=assignment.id%>" method="post">
+                        <form action="/<%=@assignments.first.subject.slugify%>/assignments/<%=assignment.id%>" method="post">
                             <input type="hidden" name="_method" value="delete">
                             <button type="submit">Delete</button>
                         </form>
@@ -67,7 +67,7 @@
 
     <br>
     <div class="centered">
-        <a href="/assignments/new">
+        <a href="/<%=@subject.slugify%>/assignments/new">
             <button id="add_assignment"> Add Assignment </button>
         </a>
         <br>

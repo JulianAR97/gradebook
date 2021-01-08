@@ -1,4 +1,4 @@
-# User seeding
+# User / Subject seeding 
 user_list = {
     'Kyle' => {
       username: 'save',
@@ -21,11 +21,22 @@ user_list = {
       password: 'ilovejulian'
     }
 }
+
+subject_list = [
+  'math',
+  'science',
+  'history',
+  'english',
+  'computer science'
+]
 # '_' is customary for argument that won't be used
 user_list.each do |_, u_hash|
-    User.create(username: u_hash[:username], password: u_hash[:password])
+    user = User.create(username: u_hash[:username], password: u_hash[:password])
+    subject_list.each do |s|
+      user.subjects << Subject.create(title: s)
+    end
 end
-  
+
 # Assignment Seeding
 def rand_by_five(low, high)
     loop do
@@ -35,12 +46,12 @@ def rand_by_five(low, high)
 end
   
 a_types = {
-'homework' => { low: 10, high: 20 },
-'project' => { low: 50, high: 120 },
-'test' => { low: 75, high: 150 }
+  'homework' => { low: 10, high: 20 },
+  'project' => { low: 50, high: 120 },
+  'test' => { low: 75, high: 150 }
 }
   
-30.times do
+(Subject.count * 7).times do
     s = a_types.to_a.sample # s = [type, score_possible_range]
     if s[0] == 'homework' 
         score_possible = rand(s[1][:low]..s[1][:high])
@@ -49,5 +60,6 @@ a_types = {
     end 
 
     score_earned = rand((score_possible / 2).round(0)..score_possible)
-    Assignment.create(category: s[0], score_earned: score_earned, score_possible: score_possible, user_id: rand(1..5))
+
+    Assignment.create(category: s[0], score_earned: score_earned, score_possible: score_possible, subject_id: rand(1..Subject.count))
 end
