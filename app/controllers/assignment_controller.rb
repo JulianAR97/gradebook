@@ -1,9 +1,10 @@
 class AssignmentController < ApplicationController
+    
     get '/:slug/assignments' do
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
             if @subject
-                @assignments = @subject.assignments.sort_by { |a| [a[:category], a[:score_possible]] }
+                @assignments = @subject.assignments.sort_for_table
                 @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
                 @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
                 erb :'assignments/index'
@@ -19,7 +20,7 @@ class AssignmentController < ApplicationController
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
             if @subject
-                # if empty field 
+                # if empty field
                 if params[:assignment].values.include?('')
                     redirect "/#{params[:slug]}/assignments/new"
                 else
@@ -42,7 +43,7 @@ class AssignmentController < ApplicationController
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
             if @subject
-                @assignments = @subject.assignments.sort_by { |a| [a[:category], a[:score_possible]] }
+                @assignments = @subject.assignments.sort_for_table
                 @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
                 @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
                 erb :'assignments/new'
@@ -58,10 +59,9 @@ class AssignmentController < ApplicationController
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
             if @subject
-                @assignments = @subject.assignments
-                @assignment = @assignments.find_by_id(params[:id])
+                @assignments = @subject.assignments.sort_for_table
+                @assignment = @subject.assignments.find_by_id(params[:id])
                 if @assignment
-                    @s_assignments = @assignments.sort_for_table
                     @total_score = @assignments.map(&:score_earned).reduce(:+)
                     @total_possible = @assignments.map(&:score_possible).reduce(:+)
                     erb :'assignments/edit'
