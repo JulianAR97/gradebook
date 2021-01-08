@@ -28,7 +28,10 @@ class SubjectController < ApplicationController
             redirect '/subjects/new'
         else
             @subject = current_user.subjects.build(title: params[:title])
-            redirect "/subjects/#{@subject.slugify}" if @subject.save
+            if @subject.save
+                flash[:notice] = 'Class Successfully Created'
+                redirect "/#{@subject.slugify}/assignments"
+            end
         end
     end
 

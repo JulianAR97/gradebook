@@ -24,12 +24,15 @@ class AssignmentController < ApplicationController
             if @subject
                 # if empty field
                 if params[:assignment].values.include?('')
+                    flash[:notice] = 'Assignment Could Not Be Created'
                     redirect "/#{params[:slug]}/assignments/new"
                 else
                     @assignment = @subject.assignments.build(params[:assignment])
                     if @assignment.save
+                        flash[:notice] = 'Assignment Successfully Created'
                         redirect "/#{params[:slug]}/assignments"
                     else
+                        flash[:notice] = 'Assignment Could Not Be Created'
                         redirect "/#{params[:slug]}/assignments/new"
                     end
                 end
