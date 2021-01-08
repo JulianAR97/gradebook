@@ -78,10 +78,9 @@ class AssignmentController < ApplicationController
     patch '/:slug/assignments/:id' do
         if logged_in?
             @subject = current_user.subjects.find_by_slug(params[:slug])
-
             if @subject
                 if params[:assignment].values.include?('')
-                    redirect "assignments/#{params[:id]}/edit"
+                    redirect "/#{params[:slug]}/assignments/#{params[:id]}/edit"
                     # Give error message saying that fields cannot be blank
                 else
                     @assignment = Assignment.find_by_id(params[:id])
