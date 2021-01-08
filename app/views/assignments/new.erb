@@ -7,6 +7,7 @@
 
 <table class="assignments" style="width: 70%">
     <colgroup>
+        <col span="1">
         <col span="1" style="width: 25%">
         <col span="1" style="width: 15%">
         <col span="1" style="width: 15%">
@@ -14,6 +15,7 @@
     </colgroup>
     <thead>
         <tr>
+            <td> Date </td>
             <td> Type </td>
             <td> Points </td>
             <td> Possible </td>
@@ -21,16 +23,18 @@
         </tr>
     </thead>
     <tbody>
-        <% @assignments.each do |assignment| %>
+        <% @assignments.each do |a| %>
             <tr>
-                <td> <%= assignment.category %> </td>
-                <td> <%= assignment.score_earned %> </td>
-                <td> <%= assignment.score_possible %> </td>
-                <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
+                <td> <%= a.date%> </td>
+                <td> <%= a.category %> </td>
+                <td> <%= a.score_earned %> </td>
+                <td> <%= a.score_possible %> </td>
+                <td> <%= Assignment.score_as_percentage(a.score_earned, a.score_possible) %> </td>
             </tr>
         <% end %>
         <form action="/<%=@subject.slugify%>/assignments" method="post">
             <tr>
+                <td class="input_cell"><input type="date" name="assignment[date]"></td>
                 <td class="input_cell"> 
                     <select id="category" name="assignment[category]">
                         <option value="homework"> homework </option>
@@ -46,6 +50,7 @@
     </tbody>
     <tfoot>
         <tr>
+            <td></td>
             <td>Total</td>
             <!-- Sums Column Data -->
             <td> <%= @total_score ||= 0 %> </td>

@@ -7,16 +7,18 @@
 
     <table class="assignments" style="width: 70%">
         <colgroup>
-            <col span="1" style="width: 0%">
+            <col span="1">
+            <col span="1">
             <col span="1" style="width: 25%">
             <col span="1" style="width: 15%">
             <col span="1" style="width: 15%">
             <col span="1" style="width: 15%">
-            <col span="1" style="widtch: 0%">
+            <col span="1">
         </colgroup>
         <thead>
             <tr>
                 <td class="no_style"></td>
+                <td> Date </td>
                 <td> Type </td>
                 <td> Points </td>
                 <td> Possible </td>
@@ -25,19 +27,20 @@
             </tr>
         </thead>
         <tbody>
-            <% @assignments.each do |assignment| %>
+            <% @assignments.each do |a| %>
                 <tr>
                     <td class="no_style">
-                        <a href="/<%=@assignments.first.subject.slugify%>/assignments/<%= assignment.id%>/edit">
+                        <a href="/<%=@assignments.first.subject.slugify%>/assignments/<%= a.id%>/edit">
                             <button>Edit</button> 
                         </a>
                     </td>
-                    <td> <%= assignment.category %> </td>
-                    <td> <%= assignment.score_earned %> </td>
-                    <td> <%= assignment.score_possible %> </td>
-                    <td> <%= Assignment.score_as_percentage(assignment.score_earned, assignment.score_possible) %> </td>
+                    <td style="font-size:10px;"> <%= a.date%></td>
+                    <td> <%= a.category %> </td>
+                    <td> <%= a.score_earned %> </td>
+                    <td> <%= a.score_possible %> </td>
+                    <td> <%= Assignment.score_as_percentage(a.score_earned, a.score_possible) %> </td>
                     <td class="no_style">
-                        <form action="/<%=@assignments.first.subject.slugify%>/assignments/<%=assignment.id%>" method="post">
+                        <form action="/<%=@assignments.first.subject.slugify%>/assignments/<%=a.id%>" method="post">
                             <input type="hidden" name="_method" value="delete">
                             <button type="submit">Delete</button>
                         </form>
@@ -49,6 +52,7 @@
         <tfoot>
             <tr>
                 <td class="no_style"></td>
+                <td></td>
                 <td>Total</td>
                 <!-- Sums Column Data -->
                 <td> <%= @total_score ||= 0 %> </td>

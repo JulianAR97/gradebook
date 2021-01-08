@@ -7,6 +7,7 @@
 
     <table class="assignments" style="width: 70%">
         <colgroup>
+            <col span="1">
             <col span="1" style="width: 25%">
             <col span="1" style="width: 15%">
             <col span="1" style="width: 15%">
@@ -14,6 +15,7 @@
         </colgroup>
         <thead>
             <tr>
+                <td> Date </td>
                 <td> Type </td>
                 <td> Points </td>
                 <td> Possible </td>
@@ -27,6 +29,7 @@
                     <form action="/<%=@subject.slugify%>/assignments/<%=@assignment.id%>" method="post">
                         <input type="hidden" name="_method" value="patch">
                         <tr>
+                            <td> <%= a.date %> </td>
                             <td class="input_cell"> 
                                 <select id="category" name="assignment[category]">
                                     <option value="disabled" selected disabled>Choose a Type</option>
@@ -42,6 +45,7 @@
                     </form>
                 <% else %>
                     <tr>
+                        <td> <%= a.date %> </td>
                         <td> <%= a.category %> </td>
                         <td> <%= a.score_earned %> </td>
                         <td> <%= a.score_possible %> </td>
@@ -52,6 +56,7 @@
         </tbody>
         <tfoot>
             <tr>
+                <td></td>
                 <td>Total</td>
                 <!-- Sums Column Data -->
                 <td> <%= @total_score ||= 0 %> </td>
