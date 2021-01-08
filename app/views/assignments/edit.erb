@@ -24,7 +24,7 @@
             <% @assignments.each do |assignment| %>
 
                 <% if assignment.id == @assignment.id %>
-                    <form action="/assignments/<%=@assignment.id%>" method="post">
+                    <form action="/<%=@assignments.first.subject.slugify%>/assignments/<%=@assignment.id%>" method="post">
                         <input type="hidden" name="_method" value="patch">
                         <tr>
                             <td class="input_cell"> 
@@ -34,8 +34,8 @@
                                     <option value="test"> test </option>
                                 </select>
                             </td>
-                            <td class="input_cell"> <input type="number", name="assignment[score_earned]" style="width: 40px;"> </td>
-                            <td class="input_cell"> <input type="number", name="assignment[score_possible]" style="width: 40px;"> </td>
+                            <td class="input_cell"> <input type="number", name="assignment[score_earned]" value="<%=assignment.score_earned%>" style="width: 40px;"> </td>
+                            <td class="input_cell"> <input type="number", name="assignment[score_possible]" value="<%=assignment.score_possible%>" style="width: 40px;"> </td>
                             <td class="input_cell"> <button type="submit">Edit</button> </td>
                         </tr>
                     </form>
