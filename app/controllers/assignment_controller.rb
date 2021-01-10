@@ -78,4 +78,3 @@ class AssignmentController < ApplicationController
     end
 end
 
-# How should I set the subject variable in before action
