@@ -11,7 +11,6 @@ class ApplicationController < Sinatra::Base
         set :views, 'app/views'
         enable :sessions
         set :session_secret, 'session secret' # Simplified
-
     end
 
     get '/' do
@@ -30,9 +29,9 @@ class ApplicationController < Sinatra::Base
 
         def valid_password?(password)
             criteria = [
-                password.size >= 8, # password is 8 or more chars
-                !!password.match(/\d/), # password includes number
-                !!password.match(/[!@#$%^&*()+~`{}'":;.,<>?]/) #password includes special char
+              password.size >= 8, # password is 8 or more chars
+              !!password.match(/\d/), # password includes number
+              !!password.match(/[!@#$%^&*()+~`{}'":;.,<>?]/) # password includes special char
             ]
             # if each of the criteria is true, method returns true
             !criteria.include?(false)
