@@ -38,5 +38,4 @@ class ApplicationController < Sinatra::Base
             !criteria.include?(false)
         end
     end
-
 end
