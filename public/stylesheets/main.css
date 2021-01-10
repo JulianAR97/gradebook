@@ -137,6 +137,16 @@ button {
   justify-content: center;
 }
 
+input[type="text"]::placeholder {
+  color: #F2F2F2;
+}
+
+.subinp {
+  background-color: #3B945E;
+  font-family: 'Courier New', Courier, monospace;
+  color: #F2F2F2;
+}
+
 /* 182628 - Navy for font
 65CCB8 - background
 57BA98 - accent

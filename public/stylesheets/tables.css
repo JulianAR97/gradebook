@@ -8,10 +8,6 @@ thead, tfoot {
     font-weight: bold;
 }
 
-input[type="text"]::placeholder {
-    text-align: center;
-}
-
 .assingments {
     margin-left: auto;
     margin-right: auto;
@@ -40,5 +36,4 @@ input, select {
 
 .no_style {
     border: none;
-    
 }

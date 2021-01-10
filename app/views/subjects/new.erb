@@ -1,7 +1,10 @@
-<%= flash[:notice]%>
-<form action="/subjects" method="post">
-    <h3>
-        Add Class <input type="text" name="title" placeholder="Class Title">
-        <input type="submit" value="Add Class">
-    </h3>
-</form>
+<%= flash[:notice] %>
+<h3>Add Class</h3>
+<table>
+    <tr>
+        <form action="/subjects" method="post">
+            <td style="padding: 5px; padding-left: 0px;"><input class="subinp" type="text" name="title" placeholder="Class Title"></td>
+            <td style="padding: 5px;"><button type="submit">Add</button></td>
+        </form>
+    <td>
+</table>
