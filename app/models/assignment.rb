@@ -3,7 +3,8 @@ class Assignment < ActiveRecord::Base
 
     # Working, but ugly, fix please
     def self.score_as_percentage(score_earned, score_possible)
-        "%.2f" % ((score_earned * 0.1) / (score_possible * 0.1) * 100) + "%"
+        # This allows us to convert number to a float with 2 decimal places and store as string
+        format('%.2f', ((score_earned * 0.1) / (score_possible * 0.1) * 100))
     end
 
     def self.sort_for_table
