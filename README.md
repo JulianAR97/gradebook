@@ -5,8 +5,7 @@ The purpose of this project is to allow users to keep track of their school grad
 1. Fork this repository
 2. Delete Gemfile.lock
 3. Enter 'bundle install' into terminal
-4. Migrate, and seed database
-    i. If using zsh, you can simply type ./db_setup into terminal and it should automatically run the migrations and seed the database.
-    ii. Otherwise enter the following into terminal
-5. Enter 'shotgun' into terminal
-6. Navigate to 127.0.0.1:9393
+4. Enter rake db:migrate into terminal
+5. Enter rake db:seed into terminal
+6. Enter 'shotgun' into terminal
+7. Navigate to 127.0.0.1:9393
