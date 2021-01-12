@@ -58,14 +58,9 @@ class AssignmentController < ApplicationController
         else
             @assignment = Assignment.find_by_id(params[:id])
             if @assignment
-                if @assignment.update(params[:assignment])
-                    redirect "/#{params[:slug]}/assignments"
-                    # Give success message
-                else
-                    redirect "/assignments/#{params[:id]}/edit"
-                end
-            else
-                redirect '/assignments'
+                @assignment.update(params[:assignment])
+                flash[:notice] = 'Assignment Updated'
+                redirect "/#{params[:slug]}/assignments"
             end
         end
     end
