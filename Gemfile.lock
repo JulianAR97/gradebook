@@ -45,7 +45,7 @@ GEM
     minitest (5.14.3)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
-    nokogiri (1.11.1-arm64-darwin)
+    nokogiri (1.11.1-x86_64-darwin)
       racc (~> 1.4)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -108,7 +108,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
-  arm64-darwin-20
+  x86_64-darwin-20
 
 DEPENDENCIES
   activerecord (= 6.1.0)
@@ -128,4 +128,4 @@ DEPENDENCIES
   tux
 
 BUNDLED WITH
-   2.2.4
+   2.2.5

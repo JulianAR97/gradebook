@@ -23,11 +23,11 @@ class SubjectController < ApplicationController
             flash[:notice] = 'Class Creation Failed, Class Needs a Title!'
             redirect '/subjects'
         # Convert the title to downcase to keep consistency
-        elsif current_user.subjects.find_by(title: params[:title].downcase!)
+        elsif current_user.subjects.find_by(title: params[:title].downcase)
             flash[:notice] = 'Class Creation Failed, Cannot Have 2 Classes With The Same Name!'
             redirect '/subjects/new'
         else
-            @subject = current_user.subjects.build(title: params[:title])
+            @subject = current_user.subjects.build(title: params[:title].downcase)
             if @subject.save
                 flash[:notice] = 'Class Successfully Created'
                 redirect "/#{@subject.slugify}/assignments"
