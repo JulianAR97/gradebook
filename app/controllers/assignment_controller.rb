@@ -69,6 +69,7 @@ class AssignmentController < ApplicationController
     delete '/:slug/assignments/:id' do
         @assignment = @subject.assignments.find_by_id(params[:id])
         @assignment.destroy if @assignment && @assignment.subject.user == current_user
+        flash[:notice] = 'Assignment Deleted'
         redirect "/#{params[:slug]}/assignments"
     end
 end
