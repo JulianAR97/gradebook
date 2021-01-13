@@ -125,14 +125,14 @@
   font-weight: bold;
 }
 button {
-  padding-left: 7px;
-  padding-right: 7px;
   background-color: #022499;
-  border-width: 1px; 
   border-color: #96FFFF;
   border-radius: 14px;
+  border-width: 1px; 
+  color: #96FFFF;
   font-family: 'Courier New', Courier, monospace;
-  color: #F2F2F2;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 .centered {
