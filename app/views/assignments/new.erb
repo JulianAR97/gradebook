@@ -34,16 +34,16 @@
         <% end %>
         <form action="/<%=@subject.slugify%>/assignments" method="post">
             <tr>
-                <td class="input_cell"><input type="date" name="assignment[date]"></td>
+                <td class="input_cell"><input class='subinp' type="date" name="assignment[date]"></td>
                 <td class="input_cell"> 
-                    <select id="category" name="assignment[category]">
+                    <select class='subinp' id="category" name="assignment[category]">
                         <option value="homework"> homework </option>
                         <option value="project"> project </option>
                         <option value="test"> test </option>
                     </select>
                 </td>
-                <td class="input_cell"> <input type="number", name="assignment[score_earned]" style="width: 40px;"> </td>
-                <td class="input_cell"> <input type="number", name="assignment[score_possible]" style="width: 40px;"> </td>
+                <td class="input_cell"> <input class='subinp' type="number", name="assignment[score_earned]" style="width: 40px;"> </td>
+                <td class="input_cell"> <input class='subinp' type="number", name="assignment[score_possible]" style="width: 40px;"> </td>
                 <td class="input_cell"> <button type="submit">Add</button> </td>
             </tr>
         </form>
