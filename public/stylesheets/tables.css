@@ -1,5 +1,5 @@
 td {
-    border : 1px solid black;
+    border : 1px solid #022499;
     text-align: center;
     padding: 5px;
 }
@@ -14,10 +14,10 @@ thead, tfoot {
 }
 
 input, select {
-    background-color: #3B945E;
+    background-color: #96FFFF;
     padding: 0;
     font-family: 'Courier New', Courier, monospace;
-    color: #F2F2F2;
+    color: #022499;
 }
 
 /* No l/r padding for input cells in table so that col widths stay consistent */
@@ -25,7 +25,7 @@ input, select {
     padding-top: 5px;
     padding-bottom: 5px;
     font-family: 'Courier New', Courier, monospace;
-    color: #F2F2F2;
+    color: #96FFFF
 }
 
 #add_assignment {

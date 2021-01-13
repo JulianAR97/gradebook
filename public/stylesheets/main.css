@@ -13,14 +13,14 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: #57BA98;
-    color: #182628;
+    background-color: #55BDCA;
+    color: #022499;
     font-family: "Courier New", Courier, monospace;
     line-height: 18px;
   }
 
   .wrapper {
-    background: #57BA98;
+    background: #55BDCA;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -120,13 +120,13 @@
 }
 
 .creds {
-  background-color: #3B945E;
+  background-color: #55BDCA;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
 }
 button {
   width: 60px;
-  background-color: #3B945E;
+  background-color: #022499;
   font-family: 'Courier New', Courier, monospace;
   color: #F2F2F2;
 }
@@ -138,13 +138,13 @@ button {
 }
 
 input::placeholder {
-  color: #F2F2F2;
+  color: #022499;
 }
 
 .subinp {
-  background-color: #3B945E;
+  background-color: #96FFFF;
   font-family: 'Courier New', Courier, monospace;
-  color: #F2F2F2;
+  color: #022499;
 }
 
 /* 182628 - Navy for font
@@ -152,3 +152,8 @@ input::placeholder {
 57BA98 - accent
 3B945E - accent
 F2F2F2 - White */
+
+/* New Colors
+55BDCA Dark
+96FFFF Light */
+
