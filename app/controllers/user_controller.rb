@@ -16,6 +16,7 @@ class UserController < ApplicationController
             session[:user_id] = @user.id
             redirect '/subjects'
         else
+            # Fix this to work with @user.errors ? 
             flash[:notice] = 'Username or Password is Incorrect.'
             erb :'users/login'
         end
