@@ -22,6 +22,7 @@ class UserController < ApplicationController
 
     get '/signup' do
         if !logged_in?
+            @user = User.new
             erb :'users/signup'
         else
             redirect '/subjects'
@@ -29,16 +30,13 @@ class UserController < ApplicationController
     end
 
     post '/signup' do
-        if params.values.include?('') || !!User.find_by(username: params[:username])
-            # flash message saying that fields can't be empty or username already exists
-            erb :'users/signup'
-        elsif !valid_password?(params[:password])
-            # flash message saying that it is not a valid password
-            erb :'users/signup'
-        else
-            @user = User.create(username: params[:username], password: params[:password])
+        @user = User.new(username: params[:username], password: params[:password])
+        if @user.valid?
+            @user.save
             session[:user_id] = @user.id
             redirect '/subjects'
+        else
+            erb :'users/signup'
         end
     end
 
