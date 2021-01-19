@@ -155,6 +155,10 @@ input::placeholder {
   color: #022499;
 }
 
+.error_list {
+  color: red
+}
+
 /* 182628 - Navy for font
 65CCB8 - background
 57BA98 - accent

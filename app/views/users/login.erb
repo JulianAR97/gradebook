@@ -1,4 +1,8 @@
-<%= flash[:notice] %>
+<!-- Added if statement so that an empty <p> tag is not created -->
+<% if flash[:notice] %>
+  <p class="error_list"><%= flash[:notice] %></p>
+<% end %>
+
 <h3>Log In</h3>
 <br>
 <form action="/login" method="post">
