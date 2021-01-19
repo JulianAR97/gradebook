@@ -1,8 +1,9 @@
 class Assignment < ActiveRecord::Base
   belongs_to :subject
-  validates :category, presence: true, inclusion: { in: %w[homework test project]}
-  validates :score_earned, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
-  validates :score_possible, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
+  validates :category, presence: true, inclusion: { in: %w[homework test project] }
+  validates :score_earned, inclusion: { in: 0..1000, message: ' must be between 0 and 1000' }
+  # Only integer necessary? HTML should take care of that.
+  validates :score_possible, inclusion: { in: 1..1000, message: ' must be between 1 and 1000' }
   validates :date, presence: true
 
   # Working, but ugly, fix please

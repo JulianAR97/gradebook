@@ -1,4 +1,5 @@
 class AssignmentController < ApplicationController
+
   before '/:slug/assignments*' do
     @subject = current_user.subjects.find_by_slug(params[:slug])
     if @subject
@@ -6,7 +7,7 @@ class AssignmentController < ApplicationController
       @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
       @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
     else
-      redirect '/subjects' unless @subject
+      redirect '/subjects'
     end
   end
   # Index
