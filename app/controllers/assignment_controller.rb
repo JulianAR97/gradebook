@@ -45,16 +45,12 @@ class AssignmentController < ApplicationController
 
     # Edit
     patch '/:slug/assignments/:id' do
-        if params[:assignment].values.include?('')
-            redirect "/#{params[:slug]}/assignments/#{params[:id]}/edit"
-            # Give error message saying that fields cannot be blank
+        @assignment = Assignment.find_by_id(params[:id])
+        if @assignment.update(params[:assignment])
+            flash[:notice] = 'Assignment Updated'
+            redirect "/#{params[:slug]}/assignments"
         else
-            @assignment = Assignment.find_by_id(params[:id])
-            if @assignment
-                @assignment.update(params[:assignment])
-                flash[:notice] = 'Assignment Updated'
-                redirect "/#{params[:slug]}/assignments"
-            end
+            erb :"assignments/edit"
         end
     end
 

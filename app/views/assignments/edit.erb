@@ -1,75 +1,83 @@
 <head>
-    <link rel="stylesheet" href="/stylesheets/tables.css" />
+  <link rel="stylesheet" href="/stylesheets/tables.css" />
 </head>
 
+<% if @assignment.errors.any? %>
+  <ul>
+    <% @assignment.errors.full_messages.each do |msg|%>
+      <li><%= msg%></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <body>
-    <h3> <%=@subject.title%> </h3>
+  <h3> <%=@subject.title%> </h3>
 
-    <table class="assignments" style="width: 70%">
-        <colgroup>
-            <col span="1">
-            <col span="1" style="width: 25%">
-            <col span="1" style="width: 15%">
-            <col span="1" style="width: 15%">
-            <col span="1" style="width: 15%">
-        </colgroup>
-        <thead>
+  <table class="assignments" style="width: 70%">
+    <colgroup>
+      <col span="1">
+      <col span="1" style="width: 25%">
+      <col span="1" style="width: 15%">
+      <col span="1" style="width: 15%">
+      <col span="1" style="width: 15%">
+    </colgroup>
+    <thead>
+      <tr>
+        <td> Date </td>
+        <td> Type </td>
+        <td> Points </td>
+        <td> Possible </td>
+        <td> Grade </td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @subject.assignments.sort_for_table.each do |a| %>
+
+        <% if a.id == @assignment.id %>
+          <form action="/<%=@subject.slugify%>/assignments/<%=@assignment.id%>" method="post">
+            <input type="hidden" name="_method" value="patch">
             <tr>
-                <td> Date </td>
-                <td> Type </td>
-                <td> Points </td>
-                <td> Possible </td>
-                <td> Grade </td>
+              <td> <%= a.date %> </td>
+              <td class="input_cell"> 
+                <select class='subinp' id="category" name="assignment[category]">
+                  <option value="disabled" selected disabled>Choose a Type</option>
+                  <option value="homework"> homework </option>
+                  <option value="project"> project </option>
+                  <option value="test"> test </option>
+                </select>
+              </td>
+              <td class="input_cell"> <input class='subinp' type="number", name="assignment[score_earned]" value="<%=a.score_earned%>" style="width: 40px;"> </td>
+              <td class="input_cell"> <input class='subinp' type="number", name="assignment[score_possible]" value="<%=a.score_possible%>" style="width: 40px;"> </td>
+              <td class="input_cell"> <button type="submit">Edit</button> </td>
             </tr>
-        </thead>
-        <tbody>
-            <% @subject.assignments.sort_for_table.each do |a| %>
+          </form>
+        <% else %>
+          <tr>
+            <td> <%= a.date %> </td>
+            <td> <%= a.category %> </td>
+            <td> <%= a.score_earned %> </td>
+            <td> <%= a.score_possible %> </td>
+            <td> <%= Assignment.score_as_percentage(a.score_earned, a.score_possible) %> </td>
+          </tr>
+        <% end %>     
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td>Total</td>
+        <!-- Sums Column Data -->
+        <td> <%= @total_score ||= 0 %> </td>
+        <td> <%= @total_possible ||= 0%> </td>
+        <!-- Averages Column Data -->
+        <% if @total_possible != 0 %>
+          <td> <%= Assignment.score_as_percentage(@total_score, @total_possible) %> </td>
+        <% else %>
+          <td> 0 </td>
+        <% end %>
+      </tr>
+    </tfoot>
 
-                <% if a.id == @assignment.id %>
-                    <form action="/<%=@subject.slugify%>/assignments/<%=@assignment.id%>" method="post">
-                        <input type="hidden" name="_method" value="patch">
-                        <tr>
-                            <td> <%= a.date %> </td>
-                            <td class="input_cell"> 
-                                <select class='subinp' id="category" name="assignment[category]">
-                                    <option value="disabled" selected disabled>Choose a Type</option>
-                                    <option value="homework"> homework </option>
-                                    <option value="project"> project </option>
-                                    <option value="test"> test </option>
-                                </select>
-                            </td>
-                            <td class="input_cell"> <input class='subinp' type="number", name="assignment[score_earned]" value="<%=a.score_earned%>" style="width: 40px;"> </td>
-                            <td class="input_cell"> <input class='subinp' type="number", name="assignment[score_possible]" value="<%=a.score_possible%>" style="width: 40px;"> </td>
-                            <td class="input_cell"> <button type="submit">Edit</button> </td>
-                        </tr>
-                    </form>
-                <% else %>
-                    <tr>
-                        <td> <%= a.date %> </td>
-                        <td> <%= a.category %> </td>
-                        <td> <%= a.score_earned %> </td>
-                        <td> <%= a.score_possible %> </td>
-                        <td> <%= Assignment.score_as_percentage(a.score_earned, a.score_possible) %> </td>
-                    </tr>
-                <% end %>     
-            <% end %>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td>Total</td>
-                <!-- Sums Column Data -->
-                <td> <%= @total_score ||= 0 %> </td>
-                <td> <%= @total_possible ||= 0%> </td>
-                <!-- Averages Column Data -->
-                <% if @total_possible != 0 %>
-                    <td> <%= Assignment.score_as_percentage(@total_score, @total_possible) %> </td>
-                <% else %>
-                    <td> 0 </td>
-                <% end %>
-            </tr>
-        </tfoot>
-
-    </table>
+  </table>
 
 </body>
