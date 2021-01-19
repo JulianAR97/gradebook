@@ -7,6 +7,12 @@ class ApplicationController < Sinatra::Base
     redirect '/login' unless logged_in?
   end
 
+  # This redirects all unknown routes to route
+  not_found do
+    status 404
+    redirect '/'
+  end
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
