@@ -20,6 +20,7 @@ class AssignmentController < ApplicationController
     erb :'assignments/new'
   end
 
+  # Create
   post '/:slug/assignments' do
     # if empty field
     @assignment = @subject.assignments.build(params[:assignment])
@@ -43,7 +44,7 @@ class AssignmentController < ApplicationController
     end
   end
 
-  # Edit
+  # Update
   patch '/:slug/assignments/:id' do
     @assignment = Assignment.find_by_id(params[:id])
     if @assignment.update(params[:assignment])
@@ -54,7 +55,7 @@ class AssignmentController < ApplicationController
     end
   end
 
-  # Edit
+  # Delete
   delete '/:slug/assignments/:id' do
     @assignment = @subject.assignments.find_by_id(params[:id])
     @assignment.destroy if @assignment && @assignment.subject.user == current_user
