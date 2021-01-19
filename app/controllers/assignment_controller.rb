@@ -1,45 +1,38 @@
 class AssignmentController < ApplicationController
     before '/:slug/assignments*' do
         @subject = current_user.subjects.find_by_slug(params[:slug])
-        redirect '/subjects' unless @subject
+        if @subject
+            @assignments = @subject.assignments.sort_for_table
+            @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
+            @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
+        else
+            redirect '/subjects' unless @subject
+        end
     end
     # Index
     get '/:slug/assignments' do
-        @assignments = @subject.assignments.sort_for_table
-        @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
-        @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
         erb :'assignments/index'
     end
 
     # New
-    post '/:slug/assignments' do
-        # if empty field
-        if params[:assignment].values.include?('')
-            flash[:notice] = 'Assignment Could Not Be Created'
-            redirect "/#{params[:slug]}/assignments/new"
-        else
-            @assignment = @subject.assignments.build(params[:assignment])
-            if @assignment.save # Don't know if this is necessary
-                flash[:notice] = 'Assignment Successfully Created'
-                redirect "/#{params[:slug]}/assignments"
-            else
-                flash[:notice] = 'Assignment Could Not Be Created'
-                redirect "/#{params[:slug]}/assignments/new"
-            end
-        end
+    get '/:slug/assignments/new' do
+        @assignment = Assignment.new
+        erb :'assignments/new'
     end
 
-    # New
-    get '/:slug/assignments/new' do
-        @assignments = @subject.assignments.sort_for_table
-        @total_score = @subject.assignments.map(&:score_earned).reduce(:+)
-        @total_possible = @subject.assignments.map(&:score_possible).reduce(:+)
-        erb :'assignments/new'
+    post '/:slug/assignments' do
+        # if empty field
+        @assignment = @subject.assignments.build(params[:assignment])
+        if @assignment.save
+            flash[:notice] = 'Assignment Successfully Created'
+            redirect "/#{params[:slug]}/assignments"
+        else
+            erb :"assignments/new"
+        end
     end
 
     # Edit
     get '/:slug/assignments/:id/edit' do
-        @assignments = @subject.assignments.sort_for_table
         @assignment = @subject.assignments.find_by_id(params[:id])
         if @assignment
             @total_score = @assignments.map(&:score_earned).reduce(:+)

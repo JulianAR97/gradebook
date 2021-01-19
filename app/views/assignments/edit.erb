@@ -3,7 +3,7 @@
 </head>
 
 <body>
-    <h3> <%=@subject.display_title%> </h3>
+    <h3> <%=@subject.title%> </h3>
 
     <table class="assignments" style="width: 70%">
         <colgroup>
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            <% @assignments.each do |a| %>
+            <% @subject.assignments.sort_for_table.each do |a| %>
 
                 <% if a.id == @assignment.id %>
                     <form action="/<%=@subject.slugify%>/assignments/<%=@assignment.id%>" method="post">
