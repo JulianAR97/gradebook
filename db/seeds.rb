@@ -10,7 +10,7 @@ user_list = {
   },
   'Kaycee' => {
     username: 'bucsfan',
-    password: 'bruins19'
+    password: 'liontiger'
   },
   'Julian' => {
     username: 'thecreator',
