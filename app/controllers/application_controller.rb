@@ -2,7 +2,8 @@ require './config/environment'
 require 'rack-flash' # Why is this necessary
 class ApplicationController < Sinatra::Base
   use Rack::Flash
-  before '/subjects*' && '/:a/assignments*' && '/' do
+  # Check to make sure we are logged in before doing anything
+  before ['/subjects*', '/:a/assignments*', '/'] do
     redirect '/login' unless logged_in?
   end
 
