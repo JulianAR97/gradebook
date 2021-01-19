@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before '/login' || '/signup' do
+  before ['/login', '/signup'] do
     redirect '/subjects' if logged_in?
   end
 
