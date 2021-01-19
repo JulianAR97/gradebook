@@ -5,7 +5,7 @@
 <table>
   <% @subjects.each do |subject|%>
     <tr>
-      <td style="padding: 5px; padding-left: 0px;"><a href="/<%=subject.slugify%>/assignments"><%= subject.display_title %></a></td>
+      <td style="padding: 5px; padding-left: 0px;"><a href="/<%=subject.slugify%>/assignments"><%= subject.title %></a></td>
         <form action="/subjects/<%=subject.slugify%>" method="post">
           <input type="hidden" name="_method" value="delete">
           <td style="padding: 5px;"><button type="submit">Remove</button></td>
