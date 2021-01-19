@@ -1,7 +1,7 @@
 class Subject < ActiveRecord::Base
   belongs_to :user
   has_many :assignments
-  validates :title, presence: true, uniqueness: true, length: { within: 2..20 }
+  validates :title, presence: true, uniqueness: true, length: { within: 2..30 }
 
   before_validation :make_title_case
 
