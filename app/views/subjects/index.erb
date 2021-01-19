@@ -1,5 +1,7 @@
 <%= flash[:notice]%>
+
 <h3>My Classes</h3>
+
 <table>
   <% @subjects.each do |subject|%>
     <tr>
@@ -12,5 +14,6 @@
   <% end %>
 </table>
 <br>
+
 <a href="/subjects/new"><button type="button" style="width: 100px; padding: 5px;">Add Class</button></a>
 
