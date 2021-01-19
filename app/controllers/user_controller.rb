@@ -16,7 +16,7 @@ class UserController < ApplicationController
             redirect '/subjects'
         else
             flash[:notice] = 'Username or Password is Incorrect.'
-            redirect '/login'
+            erb :'users/login'
         end
     end
 
@@ -31,10 +31,10 @@ class UserController < ApplicationController
     post '/signup' do
         if params.values.include?('') || !!User.find_by(username: params[:username])
             # flash message saying that fields can't be empty or username already exists
-            redirect '/signup'
+            erb :'users/signup'
         elsif !valid_password?(params[:password])
             # flash message saying that it is not a valid password
-            redirect '/signup'
+            erb :'users/signup'
         else
             @user = User.create(username: params[:username], password: params[:password])
             session[:user_id] = @user.id
