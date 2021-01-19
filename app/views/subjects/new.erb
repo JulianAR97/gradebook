@@ -1,10 +1,18 @@
-<%= flash[:notice] %>
+<% if @subject.errors.any? %>
+  <ul>
+    <% @subject.errors.full_messages.each do |msg| %>
+      <li><%= msg %><li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h3>Add Class</h3>
 <table>
-    <tr>
-        <form action="/subjects" method="post">
-            <td style="padding: 5px; padding-left: 0px;"><input class="subinp" type="text" name="title" placeholder="Class Title"></td>
-            <td style="padding: 5px;"><button type="submit">Add</button></td>
-        </form>
-    <td>
+  <tr>
+    <form action="/subjects" method="post">
+      <!-- Put style in css -->
+      <td style="padding: 5px; padding-left: 0px;"><input class="subinp" type="text" name="title" placeholder="Class Title"></td>
+      <td style="padding: 5px;"><button type="submit">Add</button></td>
+    </form>
+  </tr>
 </table>
